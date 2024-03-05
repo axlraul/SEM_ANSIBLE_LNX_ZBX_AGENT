@@ -7,13 +7,22 @@
   ansible.builtin.yum:
     name: zabbix-agent
     state: present
+  notify:
+    - Restart zabbix-agent
+    - Enable zabbix-agent
 
-- name: Ensure Zabbix Agent service is started
-  ansible.builtin.systemd:
-    name: zabbix-agent
-    state: started
+- name: Update Zabbix Agent configuration file
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Server=127.0.0.1'
+    line: 'Server=192.168.1.181'
+  notify:
+    - Restart zabbix-agent
 
-- name: Ensure Zabbix Agent service is enabled at startup
-  ansible.builtin.systemd:
-    name: zabbix-agent
-    enabled: yes
+- name: Add port 10050 to firewall
+  firewalld:
+    port: 10050/tcp
+    permanent: true
+    state: enabled
+  notify:
+    - Restart Firewalld

@@ -1,6 +1,16 @@
 ---
-#- name: Restart Firewalld
-#  systemd:
-#    name: firewalld
-#    state: restarted
+- name: Restart zabbix-agent
+  systemd:
+    name: zabbix-agent
+    state: restarted
+
+- name: Enable zabbix-agent
+  ansible.builtin.systemd:
+    name: zabbix-agent
+    enabled: yes
+
+-name: Restart Firewalld
+  systemd:
+    name: firewalld
+    state: restarted
 
