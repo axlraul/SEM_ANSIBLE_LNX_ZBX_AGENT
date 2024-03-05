@@ -1,5 +1,5 @@
 ---
-- name: Restart Firewalld
+#- name: Restart Firewalld
 #  systemd:
 #    name: firewalld
 #    state: restarted
