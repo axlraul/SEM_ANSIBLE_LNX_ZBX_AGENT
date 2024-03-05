@@ -1,0 +1,19 @@
+- name: Install Zabbix repository RPM using yum
+  ansible.builtin.yum:
+    name: https://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
+    state: present
+
+- name: Install Zabbix Agent using yum
+  ansible.builtin.yum:
+    name: zabbix-agent
+    state: present
+
+- name: Ensure Zabbix Agent service is started
+  ansible.builtin.systemd:
+    name: zabbix-agent
+    state: started
+
+- name: Ensure Zabbix Agent service is enabled at startup
+  ansible.builtin.systemd:
+    name: zabbix-agent
+    enabled: yes
