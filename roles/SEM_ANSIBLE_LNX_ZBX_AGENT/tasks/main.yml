@@ -81,7 +81,7 @@
       comment: Accept new zabbix connections
     when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
 
-  - name: Make sure a service unit zabbix-agent is running
+  - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
       state: started
       name: zabbix-agent
@@ -157,15 +157,11 @@
       jump: ACCEPT
       comment: Accept new zabbix connections
 
-  - name: Make sure a service unit zabbix-agent is running
+  - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
       state: started
       name: zabbix-agent
-    
-  - name: Make sure a service unit zabbix-agent is running
-    ansible.builtin.systemd_service:
-      state: enabled
-      name: zabbix-agent
+      enabled: true
     
   #- name: Add port 10050 to firewall
   #  firewalld:
