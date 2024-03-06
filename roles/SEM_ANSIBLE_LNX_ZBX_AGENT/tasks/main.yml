@@ -82,10 +82,10 @@
     when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
 
   - name: Ensure zabbix-agent is enabled and started
-    ansible.builtin.systemd_service:
+    ansible.builtin.systemd:
     name: zabbix-agent
     state: started
-#    enabled: true
+    enabled: true
     
   #- name: Add port 10050 to firewall
   #  firewalld:
@@ -157,9 +157,9 @@
       comment: Accept new zabbix connections
 
   - name: Ensure zabbix-agent is enabled and started
-    ansible.builtin.systemd_service:
+    ansible.builtin.systemd:
     name: zabbix-agent
-#    state: started
+    state: started
     enabled: true
     
   #- name: Add port 10050 to firewall
