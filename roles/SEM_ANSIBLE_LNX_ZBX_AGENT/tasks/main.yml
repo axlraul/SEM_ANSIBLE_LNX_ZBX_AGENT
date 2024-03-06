@@ -22,9 +22,6 @@
   - name: debug2
     debug:
       var: "zabbix_agent_path"
-  - name: debug3
-    debug:
-      var: {{ zabbix_agent_path }}
   - name: debug4
     debug:
       var: 'zabbix_agent_path'
