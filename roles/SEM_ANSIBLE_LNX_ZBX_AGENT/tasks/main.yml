@@ -1,15 +1,12 @@
-- name: Display Ansible Facts
-  setup:
-  
 - name: Set zabbix_agent_path rhel7
   set_fact:
     zabbix_agentd_path: "/etc/zabbix_agentd.conf"
-  when: ansible_os_family == 'CentOS  ' and ansible_distribution_major_version == '7'
+  when: distribution == 'CentOS' and ansible_distribution_major_version == '7'
 
 - name: Set zabbix_agent_path rhel8
   set_fact:
     zabbix_agentd_path: "/etc/zabbix/zabbix_agentd.conf"
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
+  when: distribution == 'CentOS' and ansible_distribution_major_version == '8'
   
 - name: Install Zabbix repository RPM using yum
   ansible.builtin.yum:
