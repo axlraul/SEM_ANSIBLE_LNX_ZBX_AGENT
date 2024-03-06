@@ -1,5 +1,5 @@
 - hosts: 
-  - rhel_monit_nodes
+  - lnx_nodes
   become: true
   roles:
   - SEM_ANSIBLE_LNX_ZBX_AGENT
