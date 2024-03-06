@@ -62,5 +62,5 @@
   #    state: enabled
   #  notify:
   #    - Restart Firewalld
-  when os_family == 'RedHat' and distribution_major_version >= '7'
+  when: os_family == 'RedHat' and distribution_major_version >= '7'
 
