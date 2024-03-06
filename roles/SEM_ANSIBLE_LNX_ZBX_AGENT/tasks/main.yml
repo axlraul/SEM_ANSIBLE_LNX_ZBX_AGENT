@@ -1,25 +1,19 @@
-- name: debug1
+- name: OS debug
   debug: 
     var: ansible_facts.os_family
-- name: debug2
-  debug: 
-    var: os_family
-- name: debug3
-  debug: 
-    var: ansible_facts.ansible_distribution_major_version
-- name: debug4
+- name: Major version debug
   debug: 
     var: ansible_distribution_major_version
   
 - block:
   - name: Set zabbix_agent_path rhel7
     set_fact:
-      zabbix_agentd_path: '/etc/zabbix_agentd.conf'
+      zabbix_agentd_path: /etc/zabbix_agentd.conf
     when: ansible_facts.os_family == 'RedHat' and ansible_distribution_major_version == "7"
     
   - name: Set zabbix_agent_path rhel8-9
     set_fact:
-      zabbix_agentd_path: '/etc/zabbix/zabbix_agentd.conf'
+      zabbix_agentd_path: /etc/zabbix/zabbix_agentd.conf
     when: ansible_facts.os_family == 'RedHat' and ansible_distribution_major_version >= "8"
 
   - name: debug
