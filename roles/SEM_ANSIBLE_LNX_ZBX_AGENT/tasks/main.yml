@@ -23,8 +23,9 @@
   ansible.builtin.lineinfile:
     path: /etc/zabbix/zabbix_agentd.conf
     regexp: '^ServerActive=127.0.0.1'
-    line: 'Server=192.168.1.181'
-
+    line: 'ServerActive=192.168.1.181'
+  notify:
+    - Restart zabbix-agent
 
 - name: Add port 10050 to firewall
   firewalld:
