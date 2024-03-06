@@ -25,7 +25,7 @@
   
   - name: Update Zabbix Agent configuration file - Server value
     ansible.builtin.lineinfile:
-      path: zabbix_agentd_path
+      path: {{ zabbix_agentd_path }}
       regexp: '^Server=127.0.0.1'
       line: 'Server=192.168.1.181'
     notify:
@@ -41,7 +41,7 @@
   
   - name: Update Zabbix Agent configuration file with dynamic hostname
     ansible.builtin.replace:
-      path: zabbix_agentd_path
+      path: {{ zabbix_agentd_path}}
       regexp: '^Hostname=Zabbix server'
       replace: 'Hostname={{ ansible_hostname }}'
     notify:
