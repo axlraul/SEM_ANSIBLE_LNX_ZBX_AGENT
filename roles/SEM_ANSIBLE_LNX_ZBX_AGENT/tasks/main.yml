@@ -85,11 +85,8 @@
     ansible.builtin.systemd_service:
       state: started
       name: zabbix-agent
-    
-  - name: Make sure a service unit zabbix-agent is running
-    ansible.builtin.systemd_service:
-      state: enabled
-      name: zabbix-agent
+      enabled: true
+
     
   #- name: Add port 10050 to firewall
   #  firewalld:
