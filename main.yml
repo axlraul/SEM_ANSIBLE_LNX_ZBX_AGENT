@@ -1,4 +1,5 @@
-- hosts: new_nodes
+- hosts: 
+  - lnx_monit_nodes
   become: true
   roles:
   - SEM_ANSIBLE_LNX_ZBX_AGENT
