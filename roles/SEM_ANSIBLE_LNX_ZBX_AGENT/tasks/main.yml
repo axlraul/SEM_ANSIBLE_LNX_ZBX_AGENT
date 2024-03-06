@@ -1,3 +1,14 @@
+
+- name: Set zabbix_agent_path rhel7
+  set_fact:
+    zabbix_agentd_path: "/etc/zabbix_agentd.conf"
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- name: Set zabbix_agent_path rhel7
+  set_fact:
+    zabbix_agentd_path: "/etc/zabbix/zabbix_agentd.conf"
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '8'
+  
 - name: Install Zabbix repository RPM using yum
   ansible.builtin.yum:
     name: https://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
@@ -14,7 +25,7 @@
 
 - name: Update Zabbix Agent configuration file - Server value
   ansible.builtin.lineinfile:
-    path: /etc/zabbix/zabbix_agentd.conf
+    path: {{ zabbix_agentd_path }}
     regexp: '^Server=127.0.0.1'
     line: 'Server=192.168.1.181'
   notify:
@@ -22,7 +33,7 @@
 
 - name: Update Zabbix Agent configuration file - ServerActive value
   ansible.builtin.lineinfile:
-    path: /etc/zabbix/zabbix_agentd.conf
+    path: {{ zabbix_agentd_path }}
     regexp: '^ServerActive=127.0.0.1'
     line: 'ServerActive=192.168.1.181'
   notify:
@@ -30,7 +41,7 @@
 
 - name: Update Zabbix Agent configuration file with dynamic hostname
   ansible.builtin.replace:
-    path: /etc/zabbix/zabbix_agentd.conf
+    path: {{ zabbix_agentd_path }}
     regexp: '^Hostname=Zabbix server'
     replace: 'Hostname={{ ansible_hostname }}'
   notify:
