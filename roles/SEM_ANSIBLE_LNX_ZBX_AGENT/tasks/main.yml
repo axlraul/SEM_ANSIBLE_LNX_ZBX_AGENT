@@ -99,7 +99,7 @@
       validate_certs: false
     
   - name: Install Zabbix Agent using apt
-    ansible.builtin.deb:
+    ansible.builtin.apt:
       name: zabbix-agent
       state: present
     notify:
