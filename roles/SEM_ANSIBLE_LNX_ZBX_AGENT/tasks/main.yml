@@ -11,10 +11,11 @@
       zabbix_agentd_path: /etc/zabbix/zabbix_agentd.conf
     when: ansible_facts.os_family == 'RedHat' and ansible_distribution_major_version == "7" 
     
-  - name: Set zabbix_agentd_path rhel8-9
+  - name: Set zabbix_agentd_path rhel8-9 y XCP-ng 8
     set_fact:
       zabbix_agentd_path: /etc/zabbix_agentd.conf
-    when: ansible_facts.os_family == 'RedHat' and ansible_distribution_major_version >= "8" or ansible_facts.os_family == 'XCP-ng' and ansible_distribution_major_version = "8"
+#    when: ansible_facts.os_family == 'RedHat' and ansible_distribution_major_version >= "8" or ansible_facts.os_family == 'XCP-ng' and ansible_distribution_major_version = "8"
+      when: (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] | int >= 8) or (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] | int == 8)
 
   - name: debug zabbix_agentd_path
     debug: 
