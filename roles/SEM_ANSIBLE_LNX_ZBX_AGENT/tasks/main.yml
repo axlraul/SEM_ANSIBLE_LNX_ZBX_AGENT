@@ -153,7 +153,6 @@
       protocol: tcp
       destination_port: 10050
       ctstate: NEW
-      syn: match
       jump: ACCEPT
       comment: Accept new zabbix connections
     notify:
