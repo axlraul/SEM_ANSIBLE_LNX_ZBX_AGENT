@@ -19,6 +19,16 @@
   - name: debug
     debug:
       var: zabbix_agent_path
+  - name: debug2
+    debug:
+      var: "zabbix_agent_path"
+  - name: debug3
+    debug:
+      var: {{ zabbix_agent_path }}
+  - name: debug4
+    debug:
+      var: 'zabbix_agent_path'
+      
   - name: Install Zabbix repository RPM using yum
     ansible.builtin.yum:
       name: https://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
