@@ -27,6 +27,14 @@
   notify:
     - Restart zabbix-agent
 
+- name: Update Zabbix Agent configuration file with dynamic hostname
+  ansible.builtin.replace:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Hostname=Zabbix server'
+    replace: 'Hostname={{ ansible_hostname }}'
+  notify:
+    - Restart zabbix-agent
+
 - name: Add port 10050 to firewall
   firewalld:
     port: 10050/tcp
@@ -34,3 +42,12 @@
     state: enabled
   notify:
     - Restart Firewalld
+
+#- name: Add port 10050 to firewall
+#  firewalld:
+#    port: 10051/tcp
+#    permanent: true
+#    state: enabled
+#  notify:
+#    - Restart Firewalld
+
