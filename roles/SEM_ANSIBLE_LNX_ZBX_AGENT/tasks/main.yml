@@ -156,13 +156,16 @@
       syn: match
       jump: ACCEPT
       comment: Accept new zabbix connections
+    notify:
+      - Restart iptables
 
   - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
       state: started
       name: zabbix-agent
       enabled: true
-    
+
+  
   #- name: Add port 10050 to firewall
   #  firewalld:
   #    port: 10051/tcp
