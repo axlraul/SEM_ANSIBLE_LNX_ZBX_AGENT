@@ -68,7 +68,7 @@
       state: enabled
     notify:
       - Restart Firewalld
-    when: (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] >= "7")
+  when: (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] >= "7")
 
   - name: Allow new incoming SYN packets on TCP port 10050 (zabbix)
     ansible.builtin.iptables:
@@ -79,7 +79,7 @@
       syn: match
       jump: ACCEPT
       comment: Accept new zabbix connections
-   when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
+  when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
   #- name: Add port 10050 to firewall
   #  firewalld:
   #    port: 10051/tcp
