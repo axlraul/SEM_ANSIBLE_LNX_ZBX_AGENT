@@ -138,7 +138,7 @@
       ctstate: NEW
       syn: match
       jump: ACCEPT
-    comment: Accept new SSH connections.
+      comment: Accept new SSH connections.
       
   #- name: Add port 10050 to firewall
   #  firewalld:
