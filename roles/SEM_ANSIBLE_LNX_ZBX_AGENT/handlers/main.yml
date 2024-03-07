@@ -18,8 +18,8 @@
   systemd:
     name: iptables
     state: restarted
-
+    
 - name: Save iptables
   command:
-    cmd: "iptables-save"
+    cmd: "service iptables save"
 
