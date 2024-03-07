@@ -80,7 +80,7 @@
       comment: Accept new zabbix connections
     notify:
       - Save iptables
-      - Restart iptables
+#      - Restart iptables
     when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
 
   - name: Make sure a service unit zabbix-agent is running and enabled
@@ -158,7 +158,7 @@
       comment: Accept new zabbix connections
     notify:
       - Save iptables
-      - Restart iptables
+ #     - Restart iptables
 
   - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
