@@ -70,18 +70,30 @@
       - Restart Firewalld
     when: (ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] >= "7")
 
-  - name: Allow new incoming SYN packets on TCP port 10050 (zabbix)
+  - name: Allow new incoming packets on TCP port 10050 (zabbix)
     ansible.builtin.iptables:
-      chain: INPUT
+      chain: RH-Firewall-1-INPUT  
       protocol: tcp
       destination_port: 10050
-      ctstate: NEW
       jump: ACCEPT
-      comment: Accept new zabbix connections
+      comment: Permitir 10050
     notify:
       - Save iptables
-#      - Restart iptables
+      - Restart iptables
     when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
+
+#  - name: Allow new incoming SYN packets on TCP port 10050 (zabbix)
+#    ansible.builtin.iptables:
+#      chain: INPUT
+#      protocol: tcp
+#      destination_port: 10050
+#      ctstate: NEW
+#      jump: ACCEPT
+#      comment: Accept new zabbix connections
+#    notify:
+#      - Save iptables
+#      - Restart iptables
+#    when: (ansible_facts['os_family'] == 'XCP-ng' and ansible_facts['distribution_major_version'] == "8")
 
   - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
@@ -150,15 +162,26 @@
   
   - name: Allow new incoming packets on TCP port 10050 (zabbix)
     ansible.builtin.iptables:
-      chain: INPUT
+      chain: RH-Firewall-1-INPUT  
       protocol: tcp
       destination_port: 10050
-      ctstate: NEW
       jump: ACCEPT
-      comment: Accept new zabbix connections
+      comment: Permitir 10050
     notify:
       - Save iptables
- #     - Restart iptables
+      - Restart iptables
+
+#  - name: Allow new incoming packets on TCP port 10050 (zabbix)
+#    ansible.builtin.iptables:
+#      chain: INPUT
+#      protocol: tcp
+#      destination_port: 10050
+#      ctstate: NEW
+#      jump: ACCEPT
+#      comment: Accept new zabbix connections
+#    notify:
+#      - Save iptables
+#      - Restart iptables
 
   - name: Make sure a service unit zabbix-agent is running and enabled
     ansible.builtin.systemd_service:
