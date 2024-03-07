@@ -19,3 +19,7 @@
     name: iptables
     state: restarted
 
+- name: Save iptables
+  command:
+    cmd: "iptables-save"
+
