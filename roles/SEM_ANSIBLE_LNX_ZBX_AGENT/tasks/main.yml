@@ -72,7 +72,7 @@
 
   - name: Allow new incoming packets on TCP port 10050 (zabbix)
     ansible.builtin.iptables:
-      chain: RH-Firewall-1-INPUT  
+      chain: INPUT  
       protocol: tcp
       destination_port: 10050
       jump: ACCEPT
@@ -162,7 +162,7 @@
   
   - name: Allow new incoming packets on TCP port 10050 (zabbix)
     ansible.builtin.iptables:
-      chain: RH-Firewall-1-INPUT  
+      chain: INPUT  
       protocol: tcp
       destination_port: 10050
       jump: ACCEPT
